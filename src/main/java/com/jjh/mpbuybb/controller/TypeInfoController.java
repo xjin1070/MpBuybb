@@ -1,5 +1,7 @@
 package com.jjh.mpbuybb.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jjh.mpbuybb.bean.TypeInfo;
 import com.jjh.mpbuybb.service.TypeInfoService;
 import com.jjh.mpbuybb.vo.LayuiVO;
@@ -81,13 +83,15 @@ public class TypeInfoController {
 //    }
 
     /**
-     * 根据tno删除商品类型
+     * 根据tno删除商品类型(物理删除)
      * @param tno 商品类型编号
      * @return
      */
-    @DeleteMapping("/delByTno")
+    @DeleteMapping("/delByTno/{tno}")
 //    @ResponseBody
-    public  ResultVO delByTno(@RequestParam Integer tno) {
+//    public  ResultVO delByTno(@RequestParam Integer tno) //不带tno删除
+    public  ResultVO delByTno(@PathVariable Integer tno) //带tno路径删除
+    {
         boolean r = typeInfoService.removeById(tno);
         if (r) {
             return new ResultVO(200, "删除成功");
@@ -100,7 +104,7 @@ public class TypeInfoController {
      * @param typeInfo 商品类型编号
      * @return
      */
-    @PutMapping("/updateById")
+    @PutMapping("/updateByTno")
     public ResultVO update(TypeInfo typeInfo) {
 //        TypeInfo typeInfo1 = typeInfoService.getBaseMapper().selectById(typeInfo.getTno());
 //        int result = typeInfoService.update(typeInfo1);
@@ -109,10 +113,14 @@ public class TypeInfoController {
 //        }
 //        return new ResultVO(500, "修改失败");
 //    }
-        if (typeInfoService.updateById(typeInfo)) {
-            return new ResultVO(200, "修改成功");
+        try {
+            if (typeInfoService.updateById(typeInfo)) {
+                return new ResultVO(200, "修改成功");
+            }
+        } catch (Exception e) {
+            return new ResultVO(501, "重复的商品类型");
         }
-        return new ResultVO(501, "修改失败");
+        return new ResultVO(502, "修改失败");
     }
 
     /**
@@ -121,8 +129,36 @@ public class TypeInfoController {
      * @return
      */
     // 模糊查询
-    @GetMapping("/")
+    @GetMapping("/finddd/{tno}/{page}/")
+    public ResultVO finddd(@PathVariable Integer tno, @PathVariable("page") Integer page,TypeInfo typeInfo) {
+        LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TypeInfo :: getTno, tno);
 
+        queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, typeInfo.getTname());
+        Page<TypeInfo> typeInfoPage = new Page<>(page, 5);
+        Page<TypeInfo> page1 = typeInfoService.page(typeInfoPage, queryWrapper);
+//        List<TypeInfo> list = typeInfoService.finddd(tname, page);
+//        if (list != null && !list.isEmpty()) {
+//            return new LayuiVO(list);
+//        }
+//        return new LayuiVO(600, "暂无数据");
+
+        return new ResultVO(true, page1);
+    }
+
+    /**
+     * 根据tno查询商品类型
+     * @param tno 商品类型编号
+     * @return
+     */
+    @GetMapping("/findByTno/{tno}")
+    public ResultVO findByTno(@PathVariable Integer tno) {
+        TypeInfo typeInfo = typeInfoService.getById(tno);
+        if (typeInfo != null) {
+            return new ResultVO(200, typeInfo);
+        }
+        return new ResultVO(505, "查询失败,没有该商品类型");
+    }
 
 
 }

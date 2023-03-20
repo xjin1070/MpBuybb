@@ -16,12 +16,19 @@
       <input class="layui-input" name="tname" id="tname" autocomplete="on">
     </div>
     <button type="button" class="layui-btn layui-btn-warm layui-btn-radius" onclick="add()"> 添加  </button>
+
+<!--    <span class="navy_padding" >商品类型编号</span>-->
+    <div class="layui-inline" >
+        <input class="layui-input" name="tno"  placeholder="商品类型编号" autocomplete="on" onclick="findByTno()">
+    </div>
+    <button type="button"  class="layui-btn layui-btn-warm layui-btn-radius" onclick="add()"> 查询  </button>
 </div>
 
 <table class="layui-hide" id="type_data" lay-filter="test"></table>
-<script type="text/html" id="barDemo" slot-scope="{ row }">
+<script type="text/html" id="barDemo" >
 	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+<!--    	<a class="layui-btn layui-btn-danger layui-btn-xs" onclick="delProType()">删除</a>-->
 </script>
 
 <script type="text/html" id="checkboxTpl">
@@ -48,7 +55,7 @@ layui.use('table', function(){
 	      	{field:'tno', title:'编号',fixed: 'center', unresize: true, sort: true, align: 'center'},
 			{field:'tname', title:'名称', align: 'center', edit: 'text'},
 			{field:'status', title:'状态', align: 'center', edit: 'text', templet: function(res){
-                if (res.status == 1) {
+                if (res.status === 1) {
                     return '<em style="color: green">正常</em>'
                 }
                 return '<em style="color: red">已下架</em>'
@@ -137,10 +144,22 @@ layui.use('table', function(){
     	if(obj.event === 'del'){
       		layer.confirm('数据一旦删除将不能恢复，您确定要删除吗？', function(index){
         		obj.del();
-        		layer.close(index);
+                // var deleteObj=obj[index];
+                // console.info(deleteObj)
                 //控制台输出
-                // console.info(index);
-                // axios.delete("/delete/"+ index.tno)
+                // console.info(this.row.field)
+                $.ajax({
+                    url: "/type/delByTno?tno=108",
+                    type: "DELETE",
+                    success: function (data) {
+                        if (data.code === 200){
+                            layui.table.reload("type_data");
+                            return;
+                        }
+                        showmsg("删除商品类型失败，稍后重试","red");
+                    }
+                })
+        		layer.close(index);
 			});
     	} else if(obj.event === 'edit'){
       		layer.prompt({
@@ -172,8 +191,34 @@ function add() {
 
     }, "json")
 }
-// function delID(row){
-//     axios.delete('/delete/' + row.tno)
+// function delProType(){
+//     // console.info(this.row.field)
+//     $.ajax({
+//         url: "/type/delByTno?tno="+tno,
+//         data: {tno: tno},
+//         type: "DELETE",
+//         success: function (data) {
+//             if (data.code === 200){
+//                 layui.table.reload("type_data");
+//                 return;
+//             }
+//             showmsg("删除商品类型失败，稍后重试","red");
+//         }
+//     })
+// }
+
+// function findByTno(){
+//     $.ajax({
+//         url: "/findByTno/"+tno,
+//         type: "GET",
+//         success: function (data) {
+//             if (data.code === 200){
+//                 layui.table.reload("type_data");
+//                 return;
+//             }
+//             showmsg("删除商品类型失败，稍后重试","red");
+//         }
+//     })
 // }
 
 </script>
