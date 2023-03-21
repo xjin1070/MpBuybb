@@ -28,7 +28,11 @@ public class ResultVO {
         this.code = code;
         this.data = data;
     }
-
+    public ResultVO(int code, Object data,Boolean flag){
+        this.code = code;
+        this.data = data;
+        this.flag = flag;
+    }
 
 
 

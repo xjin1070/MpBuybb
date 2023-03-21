@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Slf4j
-@Controller
+//@Controller
 @RestController
 public class UsrInfoController {
     @Resource

@@ -42,7 +42,7 @@ public class TypeInfoController {
             return new ResultVO(510, "数据请求验证失败");
         }
         if(result > 0) {
-            return new ResultVO(200, "添加成功");
+            return new ResultVO(200, "添加成功",true);
         }
         return new ResultVO(500, "添加失败");
     }
@@ -94,7 +94,7 @@ public class TypeInfoController {
     {
         boolean r = typeInfoService.removeById(tno);
         if (r) {
-            return new ResultVO(200, "删除成功");
+            return new ResultVO(200, "删除成功",true);
         }
         return new ResultVO(505, "删除失败");
     }
@@ -115,7 +115,7 @@ public class TypeInfoController {
 //    }
         try {
             if (typeInfoService.updateById(typeInfo)) {
-                return new ResultVO(200, "修改成功");
+                return new ResultVO(200, "修改成功", true);
             }
         } catch (Exception e) {
             return new ResultVO(501, "重复的商品类型");
@@ -155,7 +155,7 @@ public class TypeInfoController {
     public ResultVO findByTno(@PathVariable Integer tno) {
         TypeInfo typeInfo = typeInfoService.getById(tno);
         if (typeInfo != null) {
-            return new ResultVO(200, typeInfo);
+            return new ResultVO(200, typeInfo,true);
         }
         return new ResultVO(505, "查询失败,没有该商品类型");
     }
