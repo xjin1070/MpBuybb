@@ -12,6 +12,7 @@ public class ResultVO {
     private int code; //响应码
     private String msg; //返回消息
     private Object data;// 返回数据
+    private boolean flag;// 返回状态
 
     public ResultVO() {
         super();
@@ -28,11 +29,14 @@ public class ResultVO {
         this.data = data;
     }
 
-    private boolean flag;
 
 
-    public ResultVO(Boolean flag){
+
+    public ResultVO(int code, String msg,Boolean flag){
         this.flag = flag;
+        this.code = code;
+        this.msg = msg;
+
     }
 
     public ResultVO(Boolean flag, String msg) {

@@ -40,12 +40,12 @@ public class UsrInfoController {
 //          if (usrInfo1.getId().equals(usrInfo.getId()) && DigestUtils.md5Hex(usrInfo.getPassword()).equals(usrInfo1.getPassword()))
         if (usrInfo1.getId().equals(usrInfo.getId()) && usrInfo.getPassword().equals(usrInfo1.getPassword()))
         {
-//              MD5校验
+//              MD5校验没写
               System.out.println(DigestUtils.md5Hex(usrInfo1.getPassword()));
 
               //方便后面的读取
               session.setAttribute("loginUser",usrInfo1);
-              return new ResultVO(200,"成功");
+              return new ResultVO(200,"成功",true);
           }
             return new ResultVO(510,"失败");
     }
