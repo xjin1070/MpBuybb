@@ -39,9 +39,11 @@ public class ResultVO {
 
     }
 
-    public ResultVO(Boolean flag, String msg) {
+    public ResultVO(int code,String msg, Boolean flag, Object data) {
         this.flag = flag;
         this.msg = msg;
+        this.data = data;
+        this.code = code;
     }
 
     public ResultVO(Boolean flag, Object data) {

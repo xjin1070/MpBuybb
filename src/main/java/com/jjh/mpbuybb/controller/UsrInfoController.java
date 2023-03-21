@@ -6,10 +6,7 @@ import com.jjh.mpbuybb.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -17,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
+@RestController
 public class UsrInfoController {
     @Resource
     UsrInfoService usrInfoService;
@@ -26,6 +24,12 @@ public class UsrInfoController {
         return "index";
     }
 
+    /**
+     * 登录
+     * @param usrInfo 用户信息
+     * @param session session
+     * @return 返回结果
+     */
     @PostMapping("/login")
     @ResponseBody
     public ResultVO checkLogin( UsrInfo usrInfo, HttpSession session){
@@ -51,4 +55,11 @@ public class UsrInfoController {
     }
 
 
+    /**
+     * 返回该id的信息
+     */
+    @GetMapping("/getById/{id}")
+    public ResultVO getById(@PathVariable Integer id){
+        return new ResultVO(200,"获取成功",true,usrInfoService.getById(id));
+    }
 }
