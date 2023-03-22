@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/type")
@@ -133,21 +134,24 @@ public class TypeInfoController {
      * @return
      */
     // 模糊查询
-    @GetMapping("/finddd/{tno}/{page}/")
-    public ResultVO finddd(@PathVariable Integer tno, @PathVariable("page") Integer page,TypeInfo typeInfo) {
-        LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(TypeInfo :: getTno, tno);
-
-        queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, typeInfo.getTname());
-        Page<TypeInfo> typeInfoPage = new Page<>(page, 5);
-        Page<TypeInfo> page1 = typeInfoService.page(typeInfoPage, queryWrapper);
+    @GetMapping("/finddd/{curentPage}/{pageSize}")
+    public Map<String,Object> finddd( @PathVariable Integer curentPage,@PathVariable Integer pageSize) {
+//        LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
+//        //queryWrapper.eq(TypeInfo :: getTno, content);
+//
+//      //  queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, content);
+//
+//        Page<TypeInfo> typeInfoPage = new Page<>(curentPage, pageSize);
+//        Page<TypeInfo> page1 = typeInfoService.page(typeInfoPage, null);
 //        List<TypeInfo> list = typeInfoService.finddd(tname, page);
 //        if (list != null && !list.isEmpty()) {
 //            return new LayuiVO(list);
 //        }
 //        return new LayuiVO(600, "暂无数据");
+       Map<String,Object> page1=typeInfoService.finds(curentPage,pageSize);
 
-        return new ResultVO(true, page1);
+       return page1;
+//        return new ResultVO(true, page1);
     }
 
     /**

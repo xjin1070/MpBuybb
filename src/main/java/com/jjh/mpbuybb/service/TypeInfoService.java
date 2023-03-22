@@ -6,6 +6,7 @@ import com.jjh.mpbuybb.bean.TypeInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface TypeInfoService extends IService<TypeInfo> {
@@ -21,5 +22,8 @@ public interface TypeInfoService extends IService<TypeInfo> {
 //     * @return
 //     */
 //    List<TypeInfo> finds();
+    //分页查询
+    public Map<String,Object> finds(int currentpage, int pagesize);
+
 
 }

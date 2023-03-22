@@ -21,4 +21,5 @@ public interface TypeInfoMapper extends BaseMapper<TypeInfo> {
 //     * @return
 //     */
 //    List<TypeInfo> finds();
+
 }

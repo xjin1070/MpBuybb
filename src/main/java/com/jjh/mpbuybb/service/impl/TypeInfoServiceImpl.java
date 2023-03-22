@@ -1,5 +1,7 @@
 package com.jjh.mpbuybb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjh.mpbuybb.bean.TypeInfo;
 import com.jjh.mpbuybb.mapper.TypeInfoMapper;
@@ -8,11 +10,36 @@ import com.jjh.mpbuybb.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class TypeInfoServiceImpl extends ServiceImpl<TypeInfoMapper,TypeInfo> implements TypeInfoService {
-//    @Autowired
-//    private TypeInfoMapper typeInfoMapper;
+    @Autowired
+    private TypeInfoMapper typeInfoMapper;
+
+
+    @Override
+    public Map<String,Object> finds(int curentPage, int pageSize) {
+
+     //   LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
+        //queryWrapper.eq(TypeInfo :: getTno, content);
+
+        //  queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, content);
+
+        Page<TypeInfo> typeInfoPage = new Page<>(curentPage, pageSize);
+        Page<TypeInfo> page1 = typeInfoMapper.selectPage(typeInfoPage, null);
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",page1.getTotal());
+        map.put("data",page1.getRecords());
+
+        return map;
+    }
+
+
+
+
 //
 //    @Override
 //    public int add(String tname) {

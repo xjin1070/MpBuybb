@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-
 @Slf4j
 //@Controller
 @RestController
@@ -61,5 +60,20 @@ public class UsrInfoController {
     @GetMapping("/getById/{id}")
     public ResultVO getById(@PathVariable Integer id){
         return new ResultVO(200,"获取成功",true,usrInfoService.getById(id));
+    }
+
+    /**
+     * 修改该id的信息
+     */
+    @PostMapping("/updateById")
+    public ResultVO updateById(UsrInfo usrInfo){
+        try {
+            if (usrInfoService.updateById(usrInfo)) {
+                return new ResultVO(200, "修改成功", true,usrInfo);
+            }
+        } catch (Exception e) {
+            return new ResultVO(501, "重复的商品类型");
+        }
+        return new ResultVO(502, "修改失败");
     }
 }
