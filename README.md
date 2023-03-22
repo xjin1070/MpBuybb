@@ -59,7 +59,7 @@
 | 获取所有内容      | get:localhost:8080/type/findAll                               | Result对象 | 得到type_info数据库所有信息                                                                  |
 | 添加商品类型      | localhost:8080/type/add?tno=102&tname=了不起的盖茨比&status=0        | Result对象      | 添加商品名称，tno是商品类型编号，tname是商品名称，status是商品状态，默认为0，代表未上架                                 |
 | 修改商品信息      | put:localhost:8080/type/updateByTno?tno=102&tname=了不起的盖茨比&status=0 | Result对象      | 修改商品名称，tno是商品类型编号，tname是商品名称，status是商品状态，默认为0，代表未上架，更新type_info数据库中任意信息（可以更新status） |
-| 删除商品信息      | delete:localhost:8080/type/delByTno/{tno} **暂时有问题删不掉东西**          | Result对象      | 删除商品类型(tno)                                                                         |
+| 删除商品信息      | delete:localhost:8080/type/delByTno/{tno}         | Result对象      | 删除商品类型(tno)                                                                         |
 | 根据tno查询商品类型 | put:localhost:8080/type/findByTno/{tno}                       | Result对象      | 无                                                                                   |
 
 [//]: # (| 更新员工         | put:localhost:8080/emp                       | Result对象      | 通过json数据更新员工                |)
@@ -96,12 +96,12 @@
 
 ### 2.3. 商品数据库(product_info)
 
-| 名称          | 接口                                         | 返回内容     | 描述                                                                                                                                                                                            |
-|-------------|--------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 获取所有内容      | get:localhost:8080/productInfo/findAllProduct | Result对象 | 得到product_info数据库所有信息                                                                                                                                                                         |
-| 添加商品      | localhost:8080/productInfo/addProduct?pname=一加Ace2pro&price=3999&pinvent=100&punit=台&pnw=288g&pexp=一年有限保修&pintro=一加手机是OPPO的子品牌&pno=104&tno=108&tname=手机&status=1         | Result对象      | 添加商品：pno商品名称，price:商品价格，pinvent:商品库存,punit:商品单位，pnw:商品净重，pexp:商品保质期/保修期，pintro:商品介绍,pno商品编号，tno:商品类型编号，tname:商品所属类型名称，status：商品状态，默认值0代表未上架，pno是主键，默认自动递增，也可自定义，除了pno以外其他都可以为空null。~~tno自增~~， |
-| 修改商品信息      | put:localhost:8080/productInfo/updateProduct       | Result对象      | 更新product_info数据库中任意信息（可以更新status），注意pno不能和之前商品的重复，否则会返回错误                                                                                                                                    |
-| 删除商品信息      | delete:localhost:8080/productInfo/deleteProduct/{id} | Result对象      | 根据商品号(pno)删除商品类型                                                                                                                                                                              |
+| 名称       | 接口                                         | 返回内容     | 描述                                                                                                                                                                                            |
+|----------|--------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 获取所有内容   | get:localhost:8080/productInfo/findAllProduct | Result对象 | 得到product_info数据库所有信息                                                                                                                                                                         |
+| 添加商品     | localhost:8080/productInfo/addProduct?pname=一加Ace2pro&price=3999&pinvent=100&punit=台&pnw=288g&pexp=一年有限保修&pintro=一加手机是OPPO的子品牌&pno=104&tno=108&tname=手机&status=1         | Result对象      | 添加商品：pno商品名称，price:商品价格，pinvent:商品库存,punit:商品单位，pnw:商品净重，pexp:商品保质期/保修期，pintro:商品介绍,pno商品编号，tno:商品类型编号，tname:商品所属类型名称，status：商品状态，默认值0代表未上架，pno是主键，默认自动递增，也可自定义，除了pno以外其他都可以为空null。~~tno自增~~， |
+| 修改商品信息   | put:localhost:8080/productInfo/updateProduct       | Result对象      | 更新product_info数据库中任意信息（可以更新status），注意pno不能和之前商品的重复，否则会返回错误                                                                                                                                    |
+| 逻辑删除商品信息 | delete:localhost:8080/productInfo/deleteProduct/{id} | Result对象      | [逻辑删除：deleted字段在“删除”成功后为1，0代表未删除]根据商品号(pno)删除商品类型                                                                                                                                             |
 
 
 ### 2.3.1 查询商品成功

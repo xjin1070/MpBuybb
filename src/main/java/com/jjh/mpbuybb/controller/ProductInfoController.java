@@ -83,7 +83,12 @@ public class ProductInfoController {
     @DeleteMapping("/delByPno/{pno}")
     public ResultVO deleteProduct(@PathVariable Integer pno) {
 //        boolean r = productInfoService.removeById(pno);
-         productInfoService.removeById(pno);
+        boolean r = productInfoService.removeById(pno);
+        if (r)
+        {
+            return new ResultVO(200, "逻辑删除成功，deleted字段为1",true);
+        }
+        return new ResultVO(505, "逻辑删除失败，deleted字段为0");
 //          productInfoMapper.deleteById(pno);
 //        System.out.println(r);
 //        if(r==0){
@@ -92,7 +97,7 @@ public class ProductInfoController {
 //        else {
 //            return new ResultVO(666, "删除失败", false);
 //        }
-        return new ResultVO(200, "删除成功", true);
+
     }
 
 
