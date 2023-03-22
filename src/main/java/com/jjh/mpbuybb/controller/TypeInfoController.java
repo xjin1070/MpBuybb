@@ -22,7 +22,7 @@ public class TypeInfoController {
     private TypeInfoService typeInfoService;
     /**
      * 处理添加商品类型
-     * @param tname
+     * @param typeInfo 商品类型
      * @return
      */
 
@@ -34,15 +34,15 @@ public class TypeInfoController {
 
     @PostMapping("/add")
 //    public ResultVO add(@RequestBody TypeInfo tname)
-    public ResultVO add( TypeInfo tname)
+    public ResultVO add(TypeInfo typeInfo)
     {
 //        int result = typeInfoService.add(tname);
-        int result = typeInfoService.getBaseMapper().insert(tname);
+        int result = typeInfoService.getBaseMapper().insert(typeInfo);
         if (result == -1) {
             return new ResultVO(510, "数据请求验证失败");
         }
         if(result > 0) {
-            return new ResultVO(200, "添加成功",true);
+            return new ResultVO(200, "添加成功",true,typeInfo);
         }
         return new ResultVO(500, "添加失败");
     }
@@ -58,6 +58,10 @@ public class TypeInfoController {
     }
 
 
+    /**
+     * 查询所有商品类型数据
+     * @return
+     */
     @GetMapping("/findAll")
     public LayuiVO findAll(){
         List<TypeInfo> list = typeInfoService.getBaseMapper().selectList(null);
@@ -115,7 +119,7 @@ public class TypeInfoController {
 //    }
         try {
             if (typeInfoService.updateById(typeInfo)) {
-                return new ResultVO(200, "修改成功", true);
+                return new ResultVO(200, "修改成功", true,typeInfo);
             }
         } catch (Exception e) {
             return new ResultVO(501, "重复的商品类型");
@@ -155,7 +159,7 @@ public class TypeInfoController {
     public ResultVO findByTno(@PathVariable Integer tno) {
         TypeInfo typeInfo = typeInfoService.getById(tno);
         if (typeInfo != null) {
-            return new ResultVO(200, typeInfo,true);
+            return new ResultVO(200,"查询视频", typeInfo,true);
         }
         return new ResultVO(505, "查询失败,没有该商品类型");
     }

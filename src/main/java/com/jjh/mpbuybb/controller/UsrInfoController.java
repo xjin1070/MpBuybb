@@ -49,7 +49,7 @@ public class UsrInfoController {
 
               //方便后面的读取
               session.setAttribute("loginUser",usrInfo1);
-              return new ResultVO(200,"成功",true);
+              return new ResultVO(200,"成功",true,usrInfo1);
           }
             return new ResultVO(510,"失败");
     }

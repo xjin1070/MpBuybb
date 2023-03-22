@@ -1,14 +1,21 @@
 package com.jjh.mpbuybb.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.Query;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jjh.mpbuybb.bean.ProductInfo;
 import com.jjh.mpbuybb.bean.TypeInfo;
+import com.jjh.mpbuybb.mapper.ProductInfoMapper;
 import com.jjh.mpbuybb.service.ProductInfoService;
+import com.jjh.mpbuybb.service.impl.ProductInfoImpl;
 import com.jjh.mpbuybb.vo.ResultVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/productInfo")
@@ -16,19 +23,24 @@ public class ProductInfoController {
     @Resource
     ProductInfoService productInfoService;
 
+    @Autowired
+    private ProductInfoMapper productInfoMapper;
+
+    @Autowired
+    private ProductInfoImpl  productInfoImpl;
     /**
      * 添加商品信息
      */
     @PostMapping("/addProduct")
     public ResultVO addProduct(ProductInfo productInfo){
-        int result = productInfoService.getBaseMapper().insert(productInfo);
-        if (result == -1) {
+        boolean result = productInfoImpl.save(productInfo);
+        if (!result) {
             return new ResultVO(510, "数据请求验证失败");
         }
-        if(result > 0) {
+        else {
             return new ResultVO(200, "添加成功", true,productInfo);
         }
-        return new ResultVO(500, "添加失败");
+//        return new ResultVO(500, "添加失败");
     }
 
     /**
@@ -46,23 +58,41 @@ public class ProductInfoController {
      */
     @PutMapping("/updateProduct")
     public ResultVO updateProduct(ProductInfo productInfo){
-        int result = productInfoService.getBaseMapper().updateById(productInfo);
-        if (result == -1) {
-            return new ResultVO(510, "数据请求验证失败");
+
+        QueryWrapper<ProductInfo> wrapper = new QueryWrapper<ProductInfo>();
+        wrapper.eq("pno",productInfo.getPno());
+        List<ProductInfo>list = productInfoMapper.selectList(wrapper);
+        if(!list.isEmpty()){
+            return new ResultVO(510,"id已存在,已存在的商品",list,false);
+        }else{
+            int result = productInfoService.getBaseMapper().updateById(productInfo);
+            if (result == -1) {
+                return new ResultVO(510, "数据请求验证失败");
+            }
+            if(result > 0) {
+                return new ResultVO(200, "修改成功", true, productInfo);
+            }
+            return new ResultVO(500, "修改失败");
         }
-        if(result > 0) {
-            return new ResultVO(200, "修改成功", true, productInfo);
-        }
-        return new ResultVO(500, "修改失败");
+
     }
 
     /**
      * 删除商品信息
      */
-    @DeleteMapping("/deleteProduct/{pno}")
+    @DeleteMapping("/delByPno/{pno}")
     public ResultVO deleteProduct(@PathVariable Integer pno) {
-
-        return new ResultVO(200, "删除成功", productInfoService.removeById(pno));
+//        boolean r = productInfoService.removeById(pno);
+         productInfoService.removeById(pno);
+//          productInfoMapper.deleteById(pno);
+//        System.out.println(r);
+//        if(r==0){
+//
+//        }
+//        else {
+//            return new ResultVO(666, "删除失败", false);
+//        }
+        return new ResultVO(200, "删除成功", true);
     }
 
 
@@ -75,7 +105,7 @@ public class ProductInfoController {
         LambdaQueryWrapper<ProductInfo> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(ProductInfo::getTno,tno);
         //根据商品名称和商品编号模糊查询
-        wrapper.like(productInfo.getPname()!= null, ProductInfo:: getPname, productInfo.getPname())
+        wrapper.like(productInfo.getPname()!= null, ProductInfo:: getPname, productInfo.getPname()).or()
                 .like(productInfo.getPno()!= null, ProductInfo:: getPno, productInfo.getPno());
 
         //分页

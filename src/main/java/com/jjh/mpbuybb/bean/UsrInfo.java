@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +22,6 @@ public class UsrInfo {
     private String name;
     private String password;
     private String position;
-//    @Email
-//    private String Email;
+
+    private String Email;
 }
