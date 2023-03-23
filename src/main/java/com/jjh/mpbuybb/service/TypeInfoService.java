@@ -23,7 +23,7 @@ public interface TypeInfoService extends IService<TypeInfo> {
 //     */
 //    List<TypeInfo> finds();
     //分页查询
-    public Map<String,Object> finds(int currentpage, int pagesize);
+//    public Map<String,Object> finds(int currentpage, int pagesize);
 
 
 }

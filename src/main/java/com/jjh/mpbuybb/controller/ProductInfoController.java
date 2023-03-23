@@ -119,7 +119,17 @@ public class ProductInfoController {
         return new ResultVO(200, "查询成功", true,page);
     }
 
-
-
+    /**
+     * 多表联合：查询type_info表中tname时显示product_info表中对应的所有商品信息
+     */
+//    @GetMapping("/findTno/{currentpage}/{pagesize}")
+//    public Page<ProductInfo> findTno(@PathVariable Integer currentpage,@PathVariable Integer pagesize){
+//        Page<ProductInfo> page = new Page<>(currentpage, pagesize);
+//        return productInfoImpl.findPage(currentpage,pagesize);
+//    }
+    @GetMapping("/testall")
+    public List<ProductInfo> testall(){
+        return productInfoMapper.getAll();
+    }
 
 }

@@ -16,28 +16,28 @@ import java.util.Map;
 
 @Service
 public class TypeInfoServiceImpl extends ServiceImpl<TypeInfoMapper,TypeInfo> implements TypeInfoService {
-    @Autowired
-    private TypeInfoMapper typeInfoMapper;
-
-
-    @Override
-    public Map<String,Object> finds(int curentPage, int pageSize) {
-
-     //   LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
-        //queryWrapper.eq(TypeInfo :: getTno, content);
-
-        //  queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, content);
-
-        Page<TypeInfo> typeInfoPage = new Page<>(curentPage, pageSize);
-        Page<TypeInfo> page1 = typeInfoMapper.selectPage(typeInfoPage, null);
-        Map<String,Object> map = new HashMap<>();
-        map.put("total",page1.getTotal());
-        map.put("data",page1.getRecords());
-
-        return map;
-    }
-
-
+//    @Autowired
+//    private TypeInfoMapper typeInfoMapper;
+//
+//    // 分页没写好
+//    @Override
+//    public Map<String,Object> finds(int curentPage, int pageSize) {
+//
+//     //   LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
+//        //queryWrapper.eq(TypeInfo :: getTno, content);
+//
+//        //  queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, content);
+//
+//        Page<TypeInfo> typeInfoPage = new Page<>(curentPage, pageSize);
+//        Page<TypeInfo> page1 = typeInfoMapper.selectPage(typeInfoPage, null);
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("total",page1.getTotal());
+//        map.put("data",page1.getRecords());
+//
+//        return map;
+//    }
+//
+//
 
 
 //

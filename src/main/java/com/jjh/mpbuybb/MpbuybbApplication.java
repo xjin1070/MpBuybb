@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.jjh.mpbuybb.mapper")
+//@MapperScan("com.jjh.mpbuybb.mapper")
 public class MpbuybbApplication {
 
     public static void main(String[] args) {

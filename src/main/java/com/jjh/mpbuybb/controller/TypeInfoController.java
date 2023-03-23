@@ -129,30 +129,30 @@ public class TypeInfoController {
     }
 
     /**
-     * 模糊查询商品类型
+     * 模糊查询商品类型（暂时不行）
      * @param
      * @return
      */
     // 模糊查询
-    @GetMapping("/finddd/{curentPage}/{pageSize}")
-    public Map<String,Object> finddd( @PathVariable Integer curentPage,@PathVariable Integer pageSize) {
-//        LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
-//        //queryWrapper.eq(TypeInfo :: getTno, content);
+//    @GetMapping("/finddd/{curentPage}/{pageSize}")
+//    public Map<String,Object> finddd( @PathVariable Integer curentPage,@PathVariable Integer pageSize) {
+////        LambdaQueryWrapper<TypeInfo> queryWrapper = new LambdaQueryWrapper<>();
+////        //queryWrapper.eq(TypeInfo :: getTno, content);
+////
+////      //  queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, content);
+////
+////        Page<TypeInfo> typeInfoPage = new Page<>(curentPage, pageSize);
+////        Page<TypeInfo> page1 = typeInfoService.page(typeInfoPage, null);
+////        List<TypeInfo> list = typeInfoService.finddd(tname, page);
+////        if (list != null && !list.isEmpty()) {
+////            return new LayuiVO(list);
+////        }
+////        return new LayuiVO(600, "暂无数据");
+//       Map<String,Object> page1=typeInfoService.finds(curentPage,pageSize);
 //
-//      //  queryWrapper.like(typeInfo.getTname() != null, TypeInfo :: getTname, content);
-//
-//        Page<TypeInfo> typeInfoPage = new Page<>(curentPage, pageSize);
-//        Page<TypeInfo> page1 = typeInfoService.page(typeInfoPage, null);
-//        List<TypeInfo> list = typeInfoService.finddd(tname, page);
-//        if (list != null && !list.isEmpty()) {
-//            return new LayuiVO(list);
-//        }
-//        return new LayuiVO(600, "暂无数据");
-       Map<String,Object> page1=typeInfoService.finds(curentPage,pageSize);
-
-       return page1;
-//        return new ResultVO(true, page1);
-    }
+//       return page1;
+////        return new ResultVO(true, page1);
+//    }
 
     /**
      * 根据tno查询商品类型

@@ -1,4 +1,4 @@
 package com.jjh.mpbuybb.config;
 
-public class WebMvcConfig {
+public class WebHandleConfig {
 }
