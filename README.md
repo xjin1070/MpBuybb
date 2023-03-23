@@ -36,7 +36,7 @@
 | 登录       | post:localhost:8080/login?id=111&password=123456                                             | json格式 | 用户登录（~~可选MD5校验~~）id是用户名，password是登录密码    |
 | 获取登录id的信息 | post:localhost:8080/getById/{id}                                                             | json格式 | 获取登陆者id的所有信息（获取其他人的也可以，这里没设置拦截器，校验等安全设置） |
 | 修改id的信息  | post:localhost:8080/updateById?id=151&password=123456&name=shhshcncdsshn&email=随随便便&position | json   | 修改登录id的信息                                |                                |
-|获取所有用户信息| get:localhost:8080/findAll                                                                   |json|获取所有用户信息|
+|获取所有用户信息| get:localhost:8080/usrGetAll                                                                   |json|获取所有用户信息|
 ### 2.1.1.登录返回格式
 
     {
