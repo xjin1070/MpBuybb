@@ -11,7 +11,7 @@
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 23/03/2023 20:41:17
+ Date: 23/03/2023 21:44:07
 */
 
 SET NAMES utf8mb4;
@@ -38,7 +38,7 @@ CREATE TABLE `cart_info`  (
 DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `orderNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '订单编号',
+  `order_num` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '订单编号',
   `amount` double(255, 2) NULL DEFAULT NULL COMMENT '总价格',
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '支付状态',
   `postage` int(0) NULL DEFAULT 0 COMMENT '邮费',
@@ -55,6 +55,14 @@ CREATE TABLE `order_info`  (
 -- Records of order_info
 -- ----------------------------
 INSERT INTO `order_info` VALUES (1, NULL, 121212.00, NULL, 1221, NULL, '21212323', 212121, '12121', 21211, NULL);
+INSERT INTO `order_info` VALUES (2, '2023-03-23 21:07:041081', 6499.00, '0', 0, '2023-03-23 21:07:04', '南华大学', 108, '小米13Ultimate', 1, 6499.00);
+INSERT INTO `order_info` VALUES (3, '2023-03-23 21:09:071081', 6499.00, '0', 0, '2023-03-23 21:09:07', '南华大学', 108, '小米13Ultimate', 1, 6499.00);
+INSERT INTO `order_info` VALUES (4, '1082023-03-23 21:32:581', 6499.00, '0', 0, '2023-03-23 21:32:58', '南华大学', 108, '小米13Ultimate', 1, 6499.00);
+INSERT INTO `order_info` VALUES (5, '202303232133456', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `order_info` VALUES (6, '1082023-03-23 21:35:551', 6499.00, '0', 0, '2023-03-23 21:35:55', '南华大学', 108, '小米13Ultimate', 1, 6499.00);
+INSERT INTO `order_info` VALUES (7, '1082023-03-23 21:37:091', 6499.00, '0', 0, '2023-03-23 21:37:09', '南华大学', 108, '小米13Ultimate', 1, 6499.00);
+INSERT INTO `order_info` VALUES (8, '108java.text.SimpleDateFormat@5069d9601', 6499.00, '0', 0, '2023-03-23 21:40:27', '南华大学', 108, '小米13Ultimate', 1, 6499.00);
+INSERT INTO `order_info` VALUES (9, '108202303232141121', 6499.00, '0', 0, '2023-03-23 21:41:12', '南华大学', 108, '小米13Ultimate', 1, 6499.00);
 
 -- ----------------------------
 -- Table structure for product_info
