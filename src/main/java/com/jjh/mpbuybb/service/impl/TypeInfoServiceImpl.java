@@ -1,6 +1,7 @@
 package com.jjh.mpbuybb.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjh.mpbuybb.bean.TypeInfo;
@@ -16,6 +17,24 @@ import java.util.Map;
 
 @Service
 public class TypeInfoServiceImpl extends ServiceImpl<TypeInfoMapper,TypeInfo> implements TypeInfoService {
+
+    @Autowired
+    private TypeInfoMapper typeInfoMapper;
+    @Override
+    public List<TypeInfo> findTypeColumn() {
+        QueryWrapper<TypeInfo> lm=new QueryWrapper<>();
+        lm.select("tname");
+
+        return typeInfoMapper.selectList(lm);
+    }
+
+    @Override
+    public List<TypeInfo> findTypeOne(String name) {
+        QueryWrapper<TypeInfo> lm=new QueryWrapper<>();
+        lm.select("tno");
+        lm.eq("tname",name);
+        return typeInfoMapper.selectList(lm);
+    }
 //    @Autowired
 //    private TypeInfoMapper typeInfoMapper;
 //

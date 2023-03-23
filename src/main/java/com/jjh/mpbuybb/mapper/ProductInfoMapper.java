@@ -15,6 +15,8 @@ import java.util.List;
 public interface ProductInfoMapper extends BaseMapper<ProductInfo> {
 //    @Select("SELECT * from product_info a JOIN type_info b on a.tno=b.tno")
 //    Page<ProductInfo> findPage(Page<ProductInfo> page);
+
+
     @Select("SELECT * from product_info a JOIN type_info b on a.tno=b.tno limit #{pageNum},#{pageSize}")
     List<ProductInfo> getAll(Integer pageNum,Integer pageSize);
 
@@ -23,7 +25,8 @@ public interface ProductInfoMapper extends BaseMapper<ProductInfo> {
 
 
     @Select("SELECT * from product_info where pname like #{pname1} limit #{pageNum},#{pageSize}")
-    List<ProductInfo> selectList(String pname1, Integer pageNum, Integer pageSize);
+    List<ProductInfo> selectLists(String pname1, Integer pageNum, Integer pageSize);
+
 
     @Select("SELECT * from product_info where pname like #{pname1}")
     List<ProductInfo> getTotal1(String pname1);

@@ -168,5 +168,29 @@ public class TypeInfoController {
         return new ResultVO(505, "查询失败,没有该商品类型");
     }
 
+    /**
+     * 返回一列tname
+     */
+
+    @GetMapping("/findTypeColumn")
+    public List<TypeInfo> findTypeColumn() {
+        return typeInfoService.findTypeColumn();
+    }
+
+    /**
+     * 返回一行
+     */
+
+//    @GetMapping("/findTypeOne")
+//    public List<TypeInfo> findTypeOne(@RequestParam String tname) {
+//        return typeInfoService.findTypeOne(tname);
+//    }
+//上下两种写法
+    @GetMapping("/findTypeOne/{tname}")
+    public List<TypeInfo> findTypeOne(@PathVariable String tname) {
+        return typeInfoService.findTypeOne(tname);
+    }
+
+
 
 }

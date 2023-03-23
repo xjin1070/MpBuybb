@@ -24,6 +24,8 @@ public interface TypeInfoService extends IService<TypeInfo> {
 //    List<TypeInfo> finds();
     //分页查询
 //    public Map<String,Object> finds(int currentpage, int pagesize);
+    List<TypeInfo> findTypeColumn();
 
+    List<TypeInfo> findTypeOne(String name);
 
 }

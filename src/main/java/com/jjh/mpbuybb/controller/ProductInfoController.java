@@ -45,12 +45,16 @@ public class ProductInfoController {
     }
 
     /**
-     * 搜索商品信息(所有)
+     * 搜索商品信息
      */
     @GetMapping("/findAllProduct")
-    public ResultVO findAllProduct(){
-        return new ResultVO(200, "查询成功", true,productInfoService.getBaseMapper().selectList(null));
+    public List<ProductInfo> findAllProduct(){
+//        return new ResultVO(200, "查询成功", true,productInfoService.getBaseMapper().selectList(null));
+        return productInfoService.findAllProduct();
     }
+
+
+
 
 
     /**
@@ -59,9 +63,7 @@ public class ProductInfoController {
     @GetMapping("/findByPname")
     public R findByPname(String pname,Integer pageNum,Integer pageSize){
         return productInfoService.findByPname(pname,pageNum,pageSize);
-
     }
-
 
     /**
      * 修改商品信息

@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.extension.api.R;
 import com.jjh.mpbuybb.bean.OrderInfo;
 import com.jjh.mpbuybb.service.OrderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -34,5 +31,26 @@ public class OrderInfoController {
         return R.ok(integer);
     }
 
+    /**
+     * 后台接口
+     * 根据商品编号或者商品名称查询订单
+     */
+//    @GetMapping("/findByOno")
+
+
+    /**
+     * 修改订单信息
+     */
+    @PostMapping("/editOrder")
+    public R editOrder(OrderInfo orderInfo) {
+        try {
+            if (orderInfoService.updateById(orderInfo)) {
+                return R.ok("修改成功");
+            }
+        } catch (Exception e) {
+            return R.failed("修改失败");
+        }
+    return R.failed("修改失败");
+    }
 
 }

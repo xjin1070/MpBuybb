@@ -7,6 +7,7 @@ import com.jjh.mpbuybb.bean.ProductInfo;
 import com.jjh.mpbuybb.mapper.ProductInfoMapper;
 import com.jjh.mpbuybb.service.ProductInfoService;
 import com.jjh.mpbuybb.vo.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Service
 public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo> implements ProductInfoService {
+
+//    @Autowired
 
 
     // 多表查询分页
@@ -34,10 +37,15 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
     }
 
     @Override
+    public List<ProductInfo> findAllProduct() {
+        return productInfoMapper.selectList(null);
+    }
+
+    @Override
     public R findByPname(String pname, Integer pageNum, Integer pageSize) {
         pageNum = (pageNum -1)*pageSize;
         String pname1 = "%"+pname+"%";
-        List<ProductInfo> productInfos=productInfoMapper.selectList(pname1,pageNum,pageSize);
+        List<ProductInfo> productInfos=productInfoMapper.selectLists(pname1,pageNum,pageSize);
 //        Integer total = productInfos.size();
         Integer total = productInfoMapper.getTotal1(pname1).size();
         return R.ok().data("productInfos",productInfos).data("total",total);

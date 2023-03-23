@@ -4,11 +4,11 @@
 # 更新内容
 
 ## 2021-03-21
-## 
-## 
-## 
-## 
-##
+##  
+##  
+##  
+##  
+## 商品类型接口新增
 ## 订单接口新增
 ## 修复total值变化的bug
 
@@ -90,6 +90,9 @@
 | 添加商品类型 | localhost:8080/type/add?tno=102&tname=了不起的盖茨比&status=0             | Result对象 | 添加商品名称，tno是商品类型编号，tname是商品名称，status是商品状态，默认为0，代表未上架                                 |
 | 修改商品信息 | put:localhost:8080/type/updateByTno?tno=102&tname=了不起的盖茨比&status=0 | Result对象 | 修改商品名称，tno是商品类型编号，tname是商品名称，status是商品状态，默认为0，代表未上架，更新type_info数据库中任意信息（可以更新status） |
 | 删除商品信息 | delete:localhost:8080/type/delByTno/{tno}                          | Result对象 | 删除商品类型(tno)                                                                         |
+|返回一列tname| get:localhost:8080/type/findTypeColumn| list     |返回一列tname|
+|返回一行数据|get:localhost:8080/type/findTypeOne/手机|list|返回一行数据|
+
                                                                     
 
 
@@ -246,6 +249,7 @@
 | 名称          | 接口                                                                                                                   | 返回内容          | 描述  |
 |-------------|----------------------------------------------------------------------------------------------------------------------|---------------|-----|
 | 将订单信息提交到数据库 | post:localhost:8080/orderInfo/addOrder?postage=1221&address=21212323&pno=212121&pname=12121&pnum=21211&amount=121212 | Result对象      | 无   |
+| 根据id修改订单信息  | post:localhost:8080/orderInfo/editOrder?postage=0&address=南华大学&pno=108&pname=小米13Ultimateeeeeeeeeee&pnum=1&amount=6499.00&price=6499.00&id=8 | Result对象      | 无   |
 
     private Integer id; //主键
     private String orderNum ; //订单编号
