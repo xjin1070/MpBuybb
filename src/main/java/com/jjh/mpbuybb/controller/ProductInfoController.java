@@ -9,12 +9,17 @@ import com.jjh.mpbuybb.bean.TypeInfo;
 import com.jjh.mpbuybb.mapper.ProductInfoMapper;
 import com.jjh.mpbuybb.service.ProductInfoService;
 import com.jjh.mpbuybb.service.impl.ProductInfoImpl;
+import com.jjh.mpbuybb.vo.LayuiVO;
 import com.jjh.mpbuybb.vo.R;
 import com.jjh.mpbuybb.vo.ResultVO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +97,7 @@ public class ProductInfoController {
     /**
      * 删除商品信息
      */
-    @DeleteMapping("/delByPno/{pno}")
+    @DeleteMapping("/deleteByPno/{pno}")
     public ResultVO deleteProduct(@PathVariable Integer pno) {
 //        boolean r = productInfoService.removeById(pno);
         boolean r = productInfoService.removeById(pno);
@@ -169,6 +174,29 @@ public class ProductInfoController {
     public List<ProductInfo> findByPnameNoPage(@PathVariable String pname){
         return productInfoService.findByPnameNoPage(pname);
     }
+
+
+    /**
+     * 文件上传
+     */
+    @Value("${file.upload.url}")
+    private String uploadFile;
+    @PostMapping("/upload")
+    @ApiOperation("添加商品信息")
+    public LayuiVO upload(ProductInfo productInfo, MultipartFile file) throws Exception{
+        productInfo.setImgs("11122.png");
+        boolean save = productInfoService.save(productInfo);
+        System.out.println(productInfo.getPno());
+        productInfo.setImgs(productInfo.getPno()+".jpg");
+        productInfoService.updateById(productInfo);
+        File dest = new File(uploadFile, productInfo.getPno() + ".jpg");
+        if(file!=null) file.transferTo(dest);
+        //存入数据
+        productInfo.setImgs(productInfo.getPno()+".jpg");
+        return new LayuiVO<>(200,"成功");
+    }
+
+
 
 
 }
