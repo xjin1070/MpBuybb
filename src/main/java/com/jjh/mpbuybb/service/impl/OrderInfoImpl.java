@@ -7,6 +7,7 @@ import com.jjh.mpbuybb.service.OrderInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
@@ -27,13 +28,26 @@ public class OrderInfoImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> imple
         orderInfo.setPrice(price);
         orderInfo.setAmount(amount);
 
-//        Date date= new Date();
+        //获取当前时间
+        Date date= new Date();
 //        long time = date.getTime();
 //        time.toString();
-//        orderInfo.setCreate_time();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dataString = sdf.format(date);
+        orderInfo.setCreate_time(dataString);
 
-//        //获取当前时间
-//        orderInfo.setOrderTime(new Date());
+        //状态
+        orderInfo.setStatus(0); //默认为0，未支付
+
+
+        //根据上面所有的信息，生成订单号
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
+        String sdf1String = sdf1.format(date);
+        String orderNo = pno+sdf1String+pnum;
+        orderInfo.setOrderNum(orderNo);
+
+
+
 
         int insert = orderInfoMapper.insert(orderInfo);
         return insert;
