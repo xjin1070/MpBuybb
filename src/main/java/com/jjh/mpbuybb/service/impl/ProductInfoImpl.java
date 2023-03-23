@@ -28,7 +28,8 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
     public R getAll(Integer pageNum, Integer pageSize) {
         pageNum = (pageNum -1)*pageSize;
          List<ProductInfo> productInfos=productInfoMapper.getAll(pageNum,pageSize);
-        Integer total = productInfos.size();
+         Integer total = productInfoMapper.getTotal().size();
+//        Integer total = productInfos.size();
         return R.ok().data("productInfos",productInfos).data("total",total);
     }
 
@@ -37,7 +38,8 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
         pageNum = (pageNum -1)*pageSize;
         String pname1 = "%"+pname+"%";
         List<ProductInfo> productInfos=productInfoMapper.selectList(pname1,pageNum,pageSize);
-        Integer total = productInfos.size();
+//        Integer total = productInfos.size();
+        Integer total = productInfoMapper.getTotal1(pname1).size();
         return R.ok().data("productInfos",productInfos).data("total",total);
 //        return productInfoMapper.selectList(pname1,pageNum,pageSize);
     }
