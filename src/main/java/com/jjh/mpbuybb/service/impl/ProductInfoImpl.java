@@ -1,5 +1,6 @@
 package com.jjh.mpbuybb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjh.mpbuybb.bean.ProductInfo;
@@ -22,7 +23,18 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
 //        return productInfoMapper.findPage(page);
 //    }
 
-    public List<ProductInfo> getAll() {
-        return productInfoMapper.getAll();
+    @Override
+    public List<ProductInfo> getAll(Integer pageNum, Integer pageSize) {
+        pageNum = pageNum -1;
+        return productInfoMapper.getAll(pageNum,pageSize);
     }
+
+    @Override
+    public List<ProductInfo> selectList(String pname, Integer pageNum, Integer pageSize) {
+        pageNum = pageNum -1;
+        String pname1 = "%"+pname+"%";
+        return productInfoMapper.selectList(pname1,pageNum,pageSize);
+    }
+
+
 }

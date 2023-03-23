@@ -53,13 +53,13 @@ public class ProductInfoController {
 
 
     /**
-     * 搜索商品信息(根据商品名称，商品名称)
+     * 搜索商品信息(根据商品名称查询后分页)
      */
     @GetMapping("/findByPname")
-    public ResultVO findByPname(String pname){
+    public ResultVO findByPname(String pname,Integer pageNum,Integer pageSize){
         QueryWrapper<ProductInfo> wrapper = new QueryWrapper<ProductInfo>();
         wrapper.like("pname",pname);
-        List<ProductInfo>list = productInfoMapper.selectList(wrapper);
+        List<ProductInfo>list = productInfoService.selectList(pname,pageNum,pageSize);
         if(list.isEmpty()){
             return new ResultVO(510,"商品不存在",list,false);
         }else{
@@ -119,20 +119,20 @@ public class ProductInfoController {
     /**
      * 搜索商品信息(根据商品名称，商品类型，商品编号)
      */
-    @GetMapping("/findProduct/{tno}/{curentPage}/{pageSize}")
-    public ResultVO findProduct(@PathVariable Integer tno,@PathVariable Integer curentPage,@PathVariable Integer pageSize,ProductInfo productInfo)
-    {
-        LambdaQueryWrapper<ProductInfo> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(ProductInfo::getTno,tno);
-        //根据商品名称和商品编号模糊查询
-        wrapper.like(productInfo.getPname()!= null, ProductInfo:: getPname, productInfo.getPname()).or()
-                .like(productInfo.getPno()!= null, ProductInfo:: getPno, productInfo.getPno());
-
-        //分页
-        Page<ProductInfo> pfPage = new Page<>(curentPage, pageSize);
-        Page<ProductInfo> page = productInfoService.page(pfPage, wrapper);
-        return new ResultVO(200, "查询成功", true,page);
-    }
+//    @GetMapping("/findProduct/{tname}/{curentPage}/{pageSize}")
+//    public ResultVO findProduct(@PathVariable Integer tno,@PathVariable Integer curentPage,@PathVariable Integer pageSize,ProductInfo productInfo)
+//    {
+//        LambdaQueryWrapper<ProductInfo> wrapper = new LambdaQueryWrapper<>();
+//        wrapper.eq(ProductInfo::getTno,tno);
+//        //根据商品名称和商品编号模糊查询
+//        wrapper.like(productInfo.getPname()!= null, ProductInfo:: getPname, productInfo.getPname()).or()
+//                .like(productInfo.getPno()!= null, ProductInfo:: getPno, productInfo.getPno());
+//
+//        //分页
+//        Page<ProductInfo> pfPage = new Page<>(curentPage, pageSize);
+//        Page<ProductInfo> page = productInfoService.page(pfPage, wrapper);
+//        return new ResultVO(200, "查询成功", true,page);
+//    }
 
     /**
      * 多表联合：查询type_info表中tname时显示product_info表中对应的所有商品信息
@@ -142,9 +142,16 @@ public class ProductInfoController {
 //        Page<ProductInfo> page = new Page<>(currentpage, pagesize);
 //        return productInfoImpl.findPage(currentpage,pagesize);
 //    }
-    @GetMapping("/testall")
-    public List<ProductInfo> testall(){
-        return productInfoMapper.getAll();
+
+    /**
+     * 多表联合：查询type_info表中tname时显示product_info表中对应的所有商品信息
+     * @param pageNum 页码
+     * @param pageSize 每页显示的条数
+     * @return 返回分页后的数据
+     */
+    @GetMapping("/getAll")
+    public List<ProductInfo> testall(Integer pageNum,Integer pageSize){
+        return productInfoService.getAll(pageNum,pageSize);
     }
 
 }
