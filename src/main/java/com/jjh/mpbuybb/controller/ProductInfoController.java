@@ -97,7 +97,7 @@ public class ProductInfoController {
     /**
      * 删除商品信息
      */
-    @DeleteMapping("/deleteByPno/{pno}")
+    @DeleteMapping("/deleteProduct/{pno}")
     public ResultVO deleteProduct(@PathVariable Integer pno) {
 //        boolean r = productInfoService.removeById(pno);
         boolean r = productInfoService.removeById(pno);
