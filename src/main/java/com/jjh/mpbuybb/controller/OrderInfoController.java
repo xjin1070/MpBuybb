@@ -36,7 +36,7 @@ public class OrderInfoController {
      * 后台接口
      * 根据商品名称查询订单
      */
-    @GetMapping("/findByPname/{pname}")
+    @GetMapping("/findByPname")
     List<OrderInfo> findByPname( String pname) {
         return orderInfoService.findByPname(pname);
     }
