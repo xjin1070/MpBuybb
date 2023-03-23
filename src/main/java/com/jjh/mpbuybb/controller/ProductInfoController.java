@@ -52,6 +52,21 @@ public class ProductInfoController {
     }
 
 
+    /**
+     * 搜索商品信息(根据商品名称，商品名称)
+     */
+    @GetMapping("/findByPname")
+    public ResultVO findByPname(String pname){
+        QueryWrapper<ProductInfo> wrapper = new QueryWrapper<ProductInfo>();
+        wrapper.like("pname",pname);
+        List<ProductInfo>list = productInfoMapper.selectList(wrapper);
+        if(list.isEmpty()){
+            return new ResultVO(510,"商品不存在",list,false);
+        }else{
+            return new ResultVO(200,"查询成功",true,list);
+        }
+    }
+
 
     /**
      * 修改商品信息
