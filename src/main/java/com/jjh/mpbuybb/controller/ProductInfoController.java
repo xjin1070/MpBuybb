@@ -73,7 +73,7 @@ public class ProductInfoController {
     /**
      * 修改商品信息
      */
-    @PutMapping("/updateProduct")
+    @PutMapping("/updateProduct}")
     public ResultVO updateProduct(ProductInfo productInfo){
 
         QueryWrapper<ProductInfo> wrapper = new QueryWrapper<ProductInfo>();

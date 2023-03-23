@@ -22,4 +22,5 @@ public interface ProductInfoService extends IService<ProductInfo> {
       List<ProductInfo> findByPnameNoPage(String pname);
 
 //    List<ProductInfo> selectList(String pname, Integer pageNum, Integer pageSize);
+
 }
