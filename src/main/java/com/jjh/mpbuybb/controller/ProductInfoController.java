@@ -78,11 +78,20 @@ public class ProductInfoController {
      * 修改商品信息
      */
     @PutMapping("/updateProduct")
-    public R updateProduct(@RequestBody ProductInfo productInfo,Integer pno){
-
-        return productInfoService.updateProduct(productInfo,pno);
-
+    public ResultVO updateProduct(ProductInfo productInfo){
+        boolean result = productInfoImpl.updateById(productInfo);
+        if (!result) {
+            return new ResultVO(510, "数据请求验证失败");
+        }
+        else {
+            return new ResultVO(200, "修改成功", true,productInfo);
+        }
     }
+//    public R updateProduct(@RequestBody ProductInfo productInfo,Integer pno){
+//
+//        return productInfoService.updateProduct(productInfo,pno);
+//
+//    }
 
     /**
      * 删除商品信息
