@@ -27,4 +27,5 @@ public class ProductInfo {
     @TableLogic(value = "0",delval = "1")
     private Integer deleted;
 
+    private String imgs; //商品图片
 }

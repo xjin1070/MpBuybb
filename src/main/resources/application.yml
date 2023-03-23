@@ -1,5 +1,8 @@
+server:
+  port: 8080
 spring:
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/buybb?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
@@ -7,9 +10,25 @@ spring:
   main:
     banner-mode: off
     allow-circular-references: true  #允许循环引用
+  mvc:
+    pathmatch:
+      #?????swagger?
+      matching-strategy: ant_path_matcher
+  web:
+    resources:
+      static-locations: file:///Users/xjin1/IdeaProjects/mpbuybb/resource/images/,classpath:/static
 
-server:
-  port:8080
+  #????
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+
+file:
+  upload:
+    url: /Users/xjin1/IdeaProjects/buybb/resource/images
+
 
 #mybatis-plus:
 

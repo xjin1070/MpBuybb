@@ -13,6 +13,7 @@ import com.jjh.mpbuybb.vo.LayuiVO;
 import com.jjh.mpbuybb.vo.R;
 import com.jjh.mpbuybb.vo.ResultVO;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -196,6 +197,46 @@ public class ProductInfoController {
         return new LayuiVO<>(200,"成功");
     }
 
+
+
+//    @ApiOperation(value = "多字段模糊查询" ,notes = "如果类型没有传就是查询所有的商品信息,如果\n1.msg是null，type不为空，根据type查询\n" +
+//            "2.如果type为空，msg不是空，直接没有类型的要求查询\n,3.如果，type不是空,msg不是空，就是在查询type这种类型下面的对应msg消息的商品信息")
+//    @GetMapping("/dimSearch")
+//    //实现一些查询功能 -手办的模糊查询
+//    public LayuiVO<List<ProductInfo>> getProductDimSearch(@RequestParam(required = false) @ApiParam("查询的内容")  String msg, @RequestParam(required = false) @ApiParam(value = "指定的类型名字" ,required = false) String type) {
+//        //限制类型，根据什么都可以进行模糊查询
+//        LambdaQueryWrapper<ProductInfo> productInfoLqw = new LambdaQueryWrapper<>();
+//        List<ProductInfo> productInfoList=null;
+//        if(msg==null && type==null) return new LayuiVO<>(510,"没有可查询的内容，查询失败");
+//        if(msg==null&&type!=null){
+//            LambdaQueryWrapper<TypeInfo> typeInfolqw = new LambdaQueryWrapper<>();
+//            typeInfolqw.eq(TypeInfo::getTname, type);
+//            TypeInfo one = productInfoService.getOne(typeInfolqw);
+//            LambdaQueryWrapper<ProductInfo> productInfoLqw1 = new LambdaQueryWrapper<>();
+//            productInfoLqw1.eq(ProductInfo::getTno,one.getTno());
+//            List<ProductInfo> list = productInfoService.list(productInfoLqw1);
+//            for (ProductInfo productInfo : list) {
+//                TypeInfo typeInfo = typeInfoService.getById(productInfo.getTno());
+//                productInfo.setTname(typeInfo.getTname());
+//            }
+//            return new LayuiVO<List<ProductInfo>>(200,list);
+//        }
+//        if (type != null){
+//            LambdaQueryWrapper<TypeInfo> typeInfoLqw = new LambdaQueryWrapper<>();
+//            typeInfoLqw.like(TypeInfo::getTname, type);
+//            TypeInfo one = typeInfoService.getOne(typeInfoLqw);
+//            if(one==null) return new LayuiVO<>(510,"当前类型不存在");
+//            //限制商品的类型
+//            productInfoLqw.like(ProductInfo::getTno,one.getTno()).like(ProductInfo::getPname,msg).or().like(ProductInfo::getIntro,msg);
+//        }
+//        productInfoLqw.like(ProductInfo::getPname,msg).or().like(ProductInfo::getIntro,msg);
+//        List<ProductInfo> list = productInfoService.list(productInfoLqw);
+//        for (ProductInfo productInfo : list) {
+//            TypeInfo typeInfo = typeInfoService.getById(productInfo.getTno());
+//            productInfo.setTname(typeInfo.getTname());
+//        }
+//        return new LayuiVO<List<ProductInfo>>(200,list);
+//    }
 
 
 

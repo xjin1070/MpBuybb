@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class LayuiVO {
+public class LayuiVO<T> {
     private int code; //响应码,如果有返回值，则为0
     private String msg; //返回消息
     private int count;//总记录数
@@ -25,6 +25,10 @@ public class LayuiVO {
     public LayuiVO( Object data) {
         super();
         this.code = 0;
+        this.data = data;
+    }
+    public LayuiVO(int code, T data) {
+        this.code = code;
         this.data = data;
     }
 }
