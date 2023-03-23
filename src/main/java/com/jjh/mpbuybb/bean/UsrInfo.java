@@ -24,4 +24,5 @@ public class UsrInfo {
     private String position;
 
     private String Email;
+    private String address; //收货地址
 }
