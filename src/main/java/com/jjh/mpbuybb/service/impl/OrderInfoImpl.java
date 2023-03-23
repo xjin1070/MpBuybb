@@ -7,6 +7,7 @@ import com.jjh.mpbuybb.service.OrderInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Service
 public class OrderInfoImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements OrderInfoService {
@@ -25,6 +26,11 @@ public class OrderInfoImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> imple
         orderInfo.setPnum(pnum);
         orderInfo.setPrice(price);
         orderInfo.setAmount(amount);
+
+//        Date date= new Date();
+//        long time = date.getTime();
+//        time.toString();
+//        orderInfo.setCreate_time();
 
 //        //获取当前时间
 //        orderInfo.setOrderTime(new Date());

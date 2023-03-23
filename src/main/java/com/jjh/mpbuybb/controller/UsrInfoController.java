@@ -76,4 +76,12 @@ public class UsrInfoController {
         }
         return new ResultVO(502, "修改失败");
     }
+
+    /**
+     * 获取所有用户信息
+     */
+    @GetMapping("/usrGetAll")
+    public ResultVO getAll(){
+        return new ResultVO(200,"获取成功",true,usrInfoService.getBaseMapper().selectList(null));
+    }
 }
