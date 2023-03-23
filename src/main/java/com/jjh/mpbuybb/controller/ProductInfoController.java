@@ -9,6 +9,7 @@ import com.jjh.mpbuybb.bean.TypeInfo;
 import com.jjh.mpbuybb.mapper.ProductInfoMapper;
 import com.jjh.mpbuybb.service.ProductInfoService;
 import com.jjh.mpbuybb.service.impl.ProductInfoImpl;
+import com.jjh.mpbuybb.vo.R;
 import com.jjh.mpbuybb.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -61,7 +62,7 @@ public class ProductInfoController {
         wrapper.like("pname",pname);
         List<ProductInfo>list = productInfoService.selectList(pname,pageNum,pageSize);
         if(list.isEmpty()){
-            return new ResultVO(510,"商品不存在",list,false);
+            return new ResultVO(510,"商品不存在",false,list);
         }else{
             return new ResultVO(200,"查询成功",true,list);
         }
@@ -78,7 +79,7 @@ public class ProductInfoController {
         wrapper.eq("pno",productInfo.getPno());
         List<ProductInfo>list = productInfoMapper.selectList(wrapper);
         if(!list.isEmpty()){
-            return new ResultVO(510,"id已存在,已存在的商品",list,false);
+            return new ResultVO(510,"id已存在,已存在的商品",false,list);
         }else{
             int result = productInfoService.getBaseMapper().updateById(productInfo);
             if (result == -1) {
@@ -150,8 +151,9 @@ public class ProductInfoController {
      * @return 返回分页后的数据
      */
     @GetMapping("/getAll")
-    public List<ProductInfo> testall(Integer pageNum,Integer pageSize){
-        return productInfoService.getAll(pageNum,pageSize);
+    public R testall(Integer pageNum,Integer pageSize){
+        return  productInfoService.getAll(pageNum,pageSize);
+
     }
 
 }

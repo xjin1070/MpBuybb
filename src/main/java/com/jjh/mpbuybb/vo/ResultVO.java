@@ -13,6 +13,7 @@ public class ResultVO {
     private String msg; //返回消息
     private Object data;// 返回数据
     private boolean flag;// 返回状态
+    private Integer total;// 返回总条数
 
     public ResultVO() {
         super();
@@ -50,9 +51,11 @@ public class ResultVO {
         this.code = code;
     }
 
-    public ResultVO(Boolean flag, Object data) {
+    public ResultVO(Boolean flag, Object data, String msg,Integer total) {
         this.flag = flag;
         this.data = data;
+        this.msg = msg;
+        this.total = total;
     }
     public ResultVO(Object object){
         this.flag = true;

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjh.mpbuybb.bean.ProductInfo;
 import com.jjh.mpbuybb.mapper.ProductInfoMapper;
 import com.jjh.mpbuybb.service.ProductInfoService;
+import com.jjh.mpbuybb.vo.R;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,14 +25,16 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
 //    }
 
     @Override
-    public List<ProductInfo> getAll(Integer pageNum, Integer pageSize) {
-        pageNum = pageNum -1;
-        return productInfoMapper.getAll(pageNum,pageSize);
+    public R getAll(Integer pageNum, Integer pageSize) {
+        pageNum = (pageNum -1)*pageSize;
+         List<ProductInfo> productInfos=productInfoMapper.getAll(pageNum,pageSize);
+        Integer total = productInfos.size();
+        return R.ok().data("productInfos",productInfos).data("total",total);
     }
 
     @Override
     public List<ProductInfo> selectList(String pname, Integer pageNum, Integer pageSize) {
-        pageNum = pageNum -1;
+        pageNum = (pageNum -1)*pageSize;
         String pname1 = "%"+pname+"%";
         return productInfoMapper.selectList(pname1,pageNum,pageSize);
     }

@@ -163,7 +163,7 @@ public class TypeInfoController {
     public ResultVO findByTno(@PathVariable Integer tno) {
         TypeInfo typeInfo = typeInfoService.getById(tno);
         if (typeInfo != null) {
-            return new ResultVO(200,"查询视频", typeInfo,true);
+            return new ResultVO(200,"查询成功", true, typeInfo);
         }
         return new ResultVO(505, "查询失败,没有该商品类型");
     }
