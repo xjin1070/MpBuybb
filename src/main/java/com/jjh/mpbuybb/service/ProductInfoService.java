@@ -11,7 +11,9 @@ import java.util.List;
 
 @Service
 public interface ProductInfoService extends IService<ProductInfo> {
+      R findByPname(String pname, Integer pageNum, Integer pageSize);
+
     R getAll(Integer pageNum, Integer pageSize);
 
-    List<ProductInfo> selectList(String pname, Integer pageNum, Integer pageSize);
+//    List<ProductInfo> selectList(String pname, Integer pageNum, Integer pageSize);
 }

@@ -33,10 +33,13 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
     }
 
     @Override
-    public List<ProductInfo> selectList(String pname, Integer pageNum, Integer pageSize) {
+    public R findByPname(String pname, Integer pageNum, Integer pageSize) {
         pageNum = (pageNum -1)*pageSize;
         String pname1 = "%"+pname+"%";
-        return productInfoMapper.selectList(pname1,pageNum,pageSize);
+        List<ProductInfo> productInfos=productInfoMapper.selectList(pname1,pageNum,pageSize);
+        Integer total = productInfos.size();
+        return R.ok().data("productInfos",productInfos).data("total",total);
+//        return productInfoMapper.selectList(pname1,pageNum,pageSize);
     }
 
 

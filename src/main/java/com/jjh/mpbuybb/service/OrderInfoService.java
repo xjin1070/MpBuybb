@@ -6,4 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface OrderInfoService extends IService<OrderInfo> {
+    Integer addOrder(Integer postage,String address,Integer pno,String pname,Integer pnum,Double price,Double amount
+    );
+
 }

@@ -57,15 +57,9 @@ public class ProductInfoController {
      * 搜索商品信息(根据商品名称查询后分页)
      */
     @GetMapping("/findByPname")
-    public ResultVO findByPname(String pname,Integer pageNum,Integer pageSize){
-        QueryWrapper<ProductInfo> wrapper = new QueryWrapper<ProductInfo>();
-        wrapper.like("pname",pname);
-        List<ProductInfo>list = productInfoService.selectList(pname,pageNum,pageSize);
-        if(list.isEmpty()){
-            return new ResultVO(510,"商品不存在",false,list);
-        }else{
-            return new ResultVO(200,"查询成功",true,list);
-        }
+    public R findByPname(String pname,Integer pageNum,Integer pageSize){
+        return productInfoService.findByPname(pname,pageNum,pageSize);
+
     }
 
 

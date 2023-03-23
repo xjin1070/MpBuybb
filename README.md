@@ -229,3 +229,30 @@
     ],
     "flag": true
     }
+
+
+### 2.4. 订单数据库(order_info)
+
+| 名称          | 接口                                                                                                                   | 返回内容          | 描述  |
+|-------------|----------------------------------------------------------------------------------------------------------------------|---------------|-----|
+| 将订单信息提交到数据库 | post:localhost:8080/orderInfo/addOrder?postage=1221&address=21212323&pno=212121&pname=12121&pnum=21211&amount=121212 | Result对象      | 无   |
+
+    private Integer id; //主键
+    private String orderNum ; //订单编号
+
+    private Double amount ; //总金额
+    private Integer status; //支付状态（0：未支付，1：已支付，2：已发货，3：已签收）
+    private Integer postage ; //邮费（默认包邮）
+    private String create_time ; //下单时间
+    private String address ; //收货地址
+    private Integer pno; //商品id
+    private String pname; //商品名称
+    private Integer pnum; //商品数量
+    private Double price; //商品单价
+
+
+    {
+    "code": 0,
+    "data": 1,
+    "msg": "执行成功"
+    }
