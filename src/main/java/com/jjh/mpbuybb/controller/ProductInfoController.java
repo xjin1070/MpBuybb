@@ -152,4 +152,23 @@ public class ProductInfoController {
 
     }
 
+    /**
+     * 根据tno返回对应所有信息
+     */
+
+    @GetMapping("/findByTno/{tno}")
+    public List<ProductInfo> findByTno(@PathVariable Integer tno){
+        return productInfoService.findByTno(tno);
+    }
+
+
+    /**
+     * 根据tno返回对应所有信息
+     */
+    @GetMapping("/findByPnameNoPage/{pname}")
+    public List<ProductInfo> findByPnameNoPage(@PathVariable String pname){
+        return productInfoService.findByPnameNoPage(pname);
+    }
+
+
 }

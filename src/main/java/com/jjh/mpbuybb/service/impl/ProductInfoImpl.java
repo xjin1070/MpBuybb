@@ -1,9 +1,11 @@
 package com.jjh.mpbuybb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjh.mpbuybb.bean.ProductInfo;
+import com.jjh.mpbuybb.bean.TypeInfo;
 import com.jjh.mpbuybb.mapper.ProductInfoMapper;
 import com.jjh.mpbuybb.service.ProductInfoService;
 import com.jjh.mpbuybb.vo.R;
@@ -39,6 +41,23 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
     @Override
     public List<ProductInfo> findAllProduct() {
         return productInfoMapper.selectList(null);
+    }
+
+    @Override
+    public List<ProductInfo> findByTno(Integer tno) {
+        QueryWrapper<ProductInfo> lm=new QueryWrapper<>();
+//        lm.select("tno");
+        lm.eq("tno",tno);
+        return productInfoMapper.selectList(lm);
+    }
+
+    @Override
+    public List<ProductInfo> findByPnameNoPage(String pname) {
+//        LQueryWrapper<ProductInfo> lm=new QueryWrapper<>();
+        LambdaQueryWrapper<ProductInfo> lm=new LambdaQueryWrapper<>();
+        //pname = "%"+pname+"%";
+        lm.like(pname!=null,ProductInfo::getPname,pname);
+        return productInfoMapper.selectList(lm);
     }
 
     @Override
