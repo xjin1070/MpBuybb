@@ -16,7 +16,7 @@ spring:
       matching-strategy: ant_path_matcher
   web:
     resources:
-      static-locations: file:///Users/xjin1/IdeaProjects/mpbuybb/resource/images/,classpath:/static
+      static-locations: file:///Users/xjin1/IdeaProjects/mpbuybb/src/main/resources/images/,classpath:/static
 
   #????
   servlet:
@@ -27,7 +27,7 @@ spring:
 
 file:
   upload:
-    url: /Users/xjin1/IdeaProjects/buybb/resource/images
+    url: /Users/xjin1/IdeaProjects/buybb/src/main/resources/images
 
 
 #mybatis-plus:

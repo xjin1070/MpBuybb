@@ -78,23 +78,9 @@ public class ProductInfoController {
      * 修改商品信息
      */
     @PutMapping("/updateProduct")
-    public ResultVO updateProduct(ProductInfo productInfo){
+    public R updateProduct(@RequestBody ProductInfo productInfo,Integer pno){
 
-        QueryWrapper<ProductInfo> wrapper = new QueryWrapper<ProductInfo>();
-        wrapper.eq("pno",productInfo.getPno());
-        List<ProductInfo>list = productInfoMapper.selectList(wrapper);
-        if(!list.isEmpty()){
-            return new ResultVO(510,"pno已存在,已存在的商品",false,list);
-        }else{
-            int result = productInfoService.getBaseMapper().updateById(productInfo);
-            if (result == -1) {
-                return new ResultVO(510, "数据请求验证失败");
-            }
-            if(result > 0) {
-                return new ResultVO(200, "修改成功", true, productInfo);
-            }
-            return new ResultVO(500, "修改失败");
-        }
+        return productInfoService.updateProduct(productInfo,pno);
 
     }
 

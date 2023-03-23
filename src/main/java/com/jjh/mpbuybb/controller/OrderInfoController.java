@@ -70,7 +70,7 @@ public class OrderInfoController {
     /**
      * 删除订单
      */
-    @PostMapping("/deleteOrder/{id}")
+    @PostMapping("/deleteOrder")
     public R deleteOrder(@RequestParam(defaultValue = "0") Integer id) {
         try {
             if (orderInfoService.removeById(id)) {

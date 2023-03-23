@@ -252,7 +252,7 @@
 |-----------------|----------------------------------------------------------------------------------------------------------------------------------------------|---------------|-----|
 | 将订单信息提交到数据库     | post:localhost:8080/orderInfo/addOrder?postage=1221&address=21212323&pno=212121&pname=12121&pnum=21211&amount=121212                         | Result对象      | 无   |
 | 根据id修改订单信息      | post:localhost:8080/orderInfo/editOrder?postage=0&address=南华大学&pno=108&pname=小米13Ultimateeeeeeeeeee&pnum=1&amount=6499.00&price=6499.00&id=8 | Result对象      | 无   |
-| 根据id删除订单信息      | delete:localhost:8080/orderInfo/deleteOrder/{id}                                                                                             | Result对象      | 无   |
+| 根据id删除订单信息      | delete:localhost:8080/orderInfo/deleteOrder?id=4                                                                                             | Result对象      | 无   |
 | 根据pname模糊查询订单信息 | get:localhost:8080/orderInfo/findByPname/{pname}                                                                                             | Result对象      | 无   |
 | 根据查询所有订单信息      | get:localhost:8080/orderInfo/findAllOrder                                                                                                    | Result对象      | 无   |
     private Integer id; //主键

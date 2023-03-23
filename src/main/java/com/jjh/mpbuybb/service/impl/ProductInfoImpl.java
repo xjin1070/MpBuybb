@@ -9,6 +9,7 @@ import com.jjh.mpbuybb.bean.TypeInfo;
 import com.jjh.mpbuybb.mapper.ProductInfoMapper;
 import com.jjh.mpbuybb.service.ProductInfoService;
 import com.jjh.mpbuybb.vo.R;
+import com.jjh.mpbuybb.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +59,80 @@ public class ProductInfoImpl extends ServiceImpl<ProductInfoMapper, ProductInfo>
         //pname = "%"+pname+"%";
         lm.like(pname!=null,ProductInfo::getPname,pname);
         return productInfoMapper.selectList(lm);
+    }
+
+    @Override
+    public R updateProduct(ProductInfo productInfo,Integer pno) {
+//        System.out.println(pno);
+//        String pname =new String();
+//        String punit =new String();
+//        String pnw =new String();
+//        String pexp =new String();
+//        String pintro =new String();
+//        String tname =new String();
+//        String imgs =new String();
+//        Double price =new Double(0);
+//        Integer pinvent =new Integer(0);
+//        Integer tno =new Integer(0);
+//        Integer status =new Integer(0);
+//        Integer deleted =new Integer(0);
+//        System.out.println(productInfo.getPname());
+//
+//        if (!productInfo.getPname().isEmpty()){
+//             pname = productInfo.getPname();
+//            System.out.println(pname);
+//        }
+//        if (!productInfo.getPrice().toString().isEmpty()){
+//             price = productInfo.getPrice();
+//        }
+//        if (!productInfo.getPinvent().toString().isEmpty()){
+//             pinvent = productInfo.getPinvent();
+//        }
+//        if (!productInfo.getPunit().isEmpty()){
+//             punit = productInfo.getPunit();
+//        }
+//        if (!productInfo.getPnw().isEmpty()){
+//             pnw = productInfo.getPnw();
+//        }
+//        if (!productInfo.getPexp().isEmpty()){
+//             pexp = productInfo.getPexp();
+//        }
+//        if (!productInfo.getPintro().isEmpty()){
+//             pintro= productInfo.getPintro();
+//        }
+//        if (!productInfo.getTno().toString().isEmpty()){
+//             tno = productInfo.getTno();
+//        }
+//        System.out.println(productInfo.getTname());
+//        if (!productInfo.getTname().isEmpty()){
+//             tname = productInfo.getTname();
+//        }
+//        if (!productInfo.getStatus().toString().isEmpty()){
+//             status = productInfo.getStatus();
+//        }
+//        if (!productInfo.getDeleted().toString().isEmpty()){
+//             deleted = productInfo.getDeleted();
+//        }
+//        if (!productInfo.getImgs().isEmpty()){
+//             imgs = productInfo.getImgs();
+//        }
+
+        String pname = productInfo.getPname();
+        Double price = productInfo.getPrice();
+        Integer pinvent = productInfo.getPinvent();
+        String punit = productInfo.getPunit();
+        String pnw = productInfo.getPnw();
+        String pexp = productInfo.getPexp();
+        String pintro= productInfo.getPintro();
+        Integer tno = productInfo.getTno();
+        String tname = productInfo.getTname();
+        Integer status = productInfo.getStatus();
+        Integer deleted = productInfo.getDeleted();
+        String imgs = productInfo.getImgs();
+
+        baseMapper.updateProduct(pname,price,pinvent,punit,pnw,pexp,pintro,tno,tname,status,deleted,imgs,pno);
+//        baseMapper.uppdateProduct01(productInfo);
+        return R.ok().message("修改成功");
     }
 
     @Override

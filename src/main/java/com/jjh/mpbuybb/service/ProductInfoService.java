@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jjh.mpbuybb.bean.ProductInfo;
 import com.jjh.mpbuybb.vo.R;
+import com.jjh.mpbuybb.vo.ResultVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +21,8 @@ public interface ProductInfoService extends IService<ProductInfo> {
       List<ProductInfo> findByTno(Integer tno);
 
       List<ProductInfo> findByPnameNoPage(String pname);
+
+     R updateProduct(ProductInfo productInfo,Integer pno);
 
 //    List<ProductInfo> selectList(String pname, Integer pageNum, Integer pageSize);
 
