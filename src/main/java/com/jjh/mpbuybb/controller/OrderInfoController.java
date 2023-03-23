@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/orderInfo")
@@ -33,9 +34,22 @@ public class OrderInfoController {
 
     /**
      * 后台接口
-     * 根据商品编号或者商品名称查询订单
+     * 根据商品名称查询订单
      */
-//    @GetMapping("/findByOno")
+    @GetMapping("/findByPname/{pname}")
+    List<OrderInfo> findByPname( String pname) {
+        return orderInfoService.findByPname(pname);
+    }
+
+
+    /**
+     * 查询所有订单
+     */
+    @GetMapping("/findAllOrder")
+    public R findAllOrder() {
+        List<OrderInfo> orderInfos = orderInfoService.list();
+        return R.ok(orderInfos);
+    }
 
 
     /**
@@ -51,6 +65,21 @@ public class OrderInfoController {
             return R.failed("修改失败");
         }
     return R.failed("修改失败");
+    }
+
+    /**
+     * 删除订单
+     */
+    @PostMapping("/deleteOrder/{id}")
+    public R deleteOrder(@RequestParam(defaultValue = "0") Integer id) {
+        try {
+            if (orderInfoService.removeById(id)) {
+                return R.ok("删除成功");
+            }
+        } catch (Exception e) {
+            return R.failed("删除失败");
+        }
+        return R.failed("删除失败");
     }
 
 }
